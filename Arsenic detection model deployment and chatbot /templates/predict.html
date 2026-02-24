@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Prediction - Arsenic Detection{% endblock %}
+{% block content %}
+  <header class="page-header">
+    <h1>Arsenic Image Prediction</h1>
+    <p>Upload an arsenic image below. When the model is loaded, detection results will appear.</p>
+  </header>
+
+  <section class="predict-section">
+    <div class="card predict-card">
+      <h2>Upload image</h2>
+      <p class="card-desc">Choose an image file to run arsenic detection.</p>
+      <form id="predict-form" class="predict-form" enctype="multipart/form-data">
+        <div class="form-row">
+          <label for="image">Arsenic image</label>
+          <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/jpg" required />
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn-predict">Run prediction</button>
+      </form>
+    </div>
+
+    <div class="card result-card" id="result-card" style="display: none;">
+      <h2>Result</h2>
+      <div class="result-value" id="result-value"></div>
+      <div class="result-label" id="result-label"></div>
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %}
+  <script>
+    document.getElementById("predict-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var fileInput = form.querySelector('input[name="image"]');
+      if (!fileInput || !fileInput.files.length) {
+        alert("Please select an image file.");
+        return;
+      }
+      var formData = new FormData();
+      formData.append("image", fileInput.files[0]);
+      var btn = document.getElementById("btn-predict");
+      btn.disabled = true;
+      btn.textContent = "Running...";
+      fetch("{{ url_for('predict') }}", {
+        method: "POST",
+        body: formData
+      })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+          var card = document.getElementById("result-card");
+          if (res.error) {
+            document.getElementById("result-value").textContent = "Error";
+            document.getElementById("result-label").textContent = res.error;
+          } else {
+            document.getElementById("result-value").textContent = res.prediction !== undefined ? res.prediction : res.label;
+            document.getElementById("result-label").textContent = res.label || "";
+          }
+          card.style.display = "block";
+        })
+        .catch(function(err) {
+          document.getElementById("result-value").textContent = "Error";
+          document.getElementById("result-label").textContent = err.message || "Request failed";
+          document.getElementById("result-card").style.display = "block";
+        })
+        .finally(function() {
+          btn.disabled = false;
+          btn.textContent = "Run prediction";
+        });
+    });
+  </script>
+{% endblock %}
