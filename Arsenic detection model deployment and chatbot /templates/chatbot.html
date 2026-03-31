@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Chatbot - Arsenic Awareness{% endblock %}
+{% block content %}
+  <header class="page-header">
+    <h1>Arsenic Awareness Chatbot</h1>
+    <p>Ask questions about arsenic poisoning, symptoms, prevention, and treatment in English or Bangla (বাংলা).</p>
+  </header>
+
+  {% if not chatbot_available %}
+  <div class="card" style="max-width: 600px;">
+    <h2>Chatbot Not Available</h2>
+    <p class="card-desc">The chatbot module could not be loaded. Check the application logs.</p>
+  </div>
+  {% else %}
+  <section class="chatbot-section">
+    <div class="card chatbot-card">
+      <div class="chatbot-messages" id="chat-messages"></div>
+      <div class="chatbot-input">
+        <input type="text" id="chat-input" placeholder="Ask in English or Bangla (বাংলা)..." />
+        <button type="button" class="btn btn-primary" id="chat-send">Send</button>
+      </div>
+      <p class="chatbot-disclaimer">This chatbot provides general awareness only. Always consult a healthcare provider for medical advice.</p>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}
+{% block scripts %}
+  {% if chatbot_available %}
+  <script>
+    (function() {
+      var messagesEl = document.getElementById("chat-messages");
+      var inputEl = document.getElementById("chat-input");
+      var sendBtn = document.getElementById("chat-send");
+
+      function addMessage(role, content) {
+        var div = document.createElement("div");
+        div.className = "chat-msg chat-msg-" + role;
+        var p = document.createElement("p");
+        p.textContent = content;
+        div.appendChild(p);
+        messagesEl.appendChild(div);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function send() {
+        var msg = inputEl.value.trim();
+        if (!msg) return;
+        inputEl.value = "";
+        addMessage("user", msg);
+        sendBtn.disabled = true;
+
+        fetch("{{ url_for('chatbot_api') }}", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg, session_id: "web" })
+        })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.error) {
+              addMessage("assistant", "Error: " + data.error);
+            } else {
+              addMessage("assistant", data.response);
+            }
+          })
+          .catch(function(e) {
+            addMessage("assistant", "Error: " + (e.message || "Request failed"));
+          })
+          .finally(function() {
+            sendBtn.disabled = false;
+          });
+      }
+
+      sendBtn.onclick = send;
+      inputEl.onkeypress = function(e) { if (e.key === "Enter") send(); };
+    })();
+  </script>
+  {% endif %}
+{% endblock %}
