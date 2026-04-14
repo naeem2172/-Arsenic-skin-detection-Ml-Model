@@ -1,0 +1,4 @@
+OK
+Response length: 736
+First 150 chars (check language): Common questions about arsenic: Q: How do I know if my water has arsenic? A: Get your water tested by a certified laboratory. Test kits are available 
+Starts with English chars: True

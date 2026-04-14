@@ -49,5 +49,26 @@ Flask web app with an interactive dashboard for your Arsenic detection ML model.
 
 - `GET /` – Dashboard
 - `GET /predict` – Predict page (form)
-- `POST /predict` – JSON body with feature keys → returns `{ "prediction": ..., "label": "..." }`
+- `POST /predict` – Form + image → returns `{ "prediction": ..., "label": "..." }`
 - `GET /api/status` – `{ "model_loaded": true/false, "model_path": "..." }`
+- `POST /api/predict-probs` – Debug: returns raw probabilities to diagnose class order
+
+## Prediction troubleshooting
+
+If the model always predicts "No arsenic" for infected images (or vice versa):
+
+1. **Swap class mapping**: Add to `.env`:
+   ```
+   ARSENIC_INFECTED_CLASS=0
+   ```
+   (Default is 1 = index 1 is infected. If infected images give high `prob_class_0`, use 0.)
+
+2. **Run diagnostic**: Test with known images:
+   ```bash
+   python test_model.py path/to/infected_image.png path/to/healthy_image.png
+   ```
+   Or with the dataset: `python test_model.py` (uses sample images from ArsenicSkinImageBD if present).
+
+3. **Debug via API**: POST an image to `/api/predict-probs` (while logged in). The response includes `suggestion` if a class swap may help.
+
+4. **Use the trained model**: Ensure `models/arsenic_skin_detection_advanced_model.h5` is from the notebook, not the placeholder from `train_model.py --placeholder`.
