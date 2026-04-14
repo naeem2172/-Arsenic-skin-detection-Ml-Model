@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% block title %}Prediction - Arsenic Detection{% endblock %}
+{% block body_class %}predict-page{% endblock %}
+{% block content %}
+  <header class="page-header">
+    <h1>Arsenic Image Prediction</h1>
+    <p>Fill in your details and upload an image for arsenic skin detection.</p>
+  </header>
+
+  <section class="predict-section">
+    <div class="card predict-card">
+      <h2>Your Details & Image</h2>
+      <p class="card-desc">All fields are required. Your information will appear with the result.</p>
+      <form id="predict-form" class="predict-form" enctype="multipart/form-data">
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your full name" />
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" value="{{ user_email }}" />
+          </div>
+          <div class="form-row">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+880 1XXX-XXXXXX" />
+          </div>
+          <div class="form-row">
+            <label for="blood_group">Blood Group</label>
+            <select id="blood_group" name="blood_group" required>
+              <option value="">Select blood group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="address">Present Address</label>
+          <textarea id="address" name="address" required rows="3" placeholder="Your current address"></textarea>
+        </div>
+        <div class="form-row">
+          <label for="image">Arsenic Skin Image</label>
+          <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/jpg" required />
+        </div>
+        <div class="image-preview" id="image-preview" style="display: none;">
+          <img id="preview-img" src="" alt="Preview" />
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn-predict">Run Prediction</button>
+      </form>
+    </div>
+
+    <div class="result-wrapper">
+      <div class="card result-card" id="result-card" style="display: none;">
+        <h2>Prediction Result</h2>
+        <div class="user-details-box" id="user-details-box">
+          <h3>Patient Details</h3>
+          <div class="detail-row"><span class="detail-label">Name:</span> <span id="res-name"></span></div>
+          <div class="detail-row"><span class="detail-label">Email:</span> <span id="res-email"></span></div>
+          <div class="detail-row"><span class="detail-label">Phone:</span> <span id="res-phone"></span></div>
+          <div class="detail-row"><span class="detail-label">Blood Group:</span> <span id="res-blood"></span></div>
+          <div class="detail-row"><span class="detail-label">Address:</span> <span id="res-address"></span></div>
+        </div>
+        <div class="result-value" id="result-value"></div>
+      </div>
+      <div class="card review-card" id="review-card" style="display: none;">
+        <h2>Rate This Prediction</h2>
+        <p class="card-desc">How helpful was this prediction? Your feedback helps us improve.</p>
+        <form id="review-form" method="POST" action="{{ url_for('predict') }}">
+          <input type="hidden" name="prediction_label" id="review-label" value="" />
+          <div class="form-row">
+            <label>Rating (required)</label>
+            <div class="rating-radios">
+              <label><input type="radio" name="rating" value="1" required /> 1 ★</label>
+              <label><input type="radio" name="rating" value="2" /> 2 ★★</label>
+              <label><input type="radio" name="rating" value="3" /> 3 ★★★</label>
+              <label><input type="radio" name="rating" value="4" /> 4 ★★★★</label>
+              <label><input type="radio" name="rating" value="5" /> 5 ★★★★★</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="review-text">Your review (optional)</label>
+            <textarea id="review-text" name="review_text" rows="3" placeholder="Share your experience or feedback..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+      </div>
+      <div class="card suggestions-card" id="suggestions-card" style="display: none;">
+        <h2>Suggestions</h2>
+        <div id="suggestions-infected" class="suggestions-content" style="display: none;">
+          <p class="suggestions-intro">Arsenic skin changes are detected. Consider the following steps:</p>
+          <ul>
+            <li><strong>Consult a doctor</strong> – Seek medical advice from a dermatologist or healthcare provider.</li>
+            <li><strong>Test your water</strong> – Have your drinking water tested for arsenic.</li>
+            <li><strong>Use safe water sources</strong> – Switch to filtered or treated water.</li>
+            <li><strong>Follow treatment plans</strong> – Use topical treatments or medications as directed.</li>
+            <li><strong>Protect affected skin</strong> – Avoid sun exposure and use sunscreen.</li>
+          </ul>
+        </div>
+        <div id="suggestions-not-infected" class="suggestions-content" style="display: none;">
+          <p class="suggestions-intro">To stay safe from arsenic exposure:</p>
+          <ul>
+            <li><strong>Test your water regularly</strong> – Test well or groundwater at least once a year.</li>
+            <li><strong>Use filtered water</strong> – Consider a water filter certified to remove arsenic.</li>
+            <li><strong>Limit exposure</strong> – Be cautious in areas with high arsenic levels.</li>
+            <li><strong>Eat a balanced diet</strong> – Support skin health with proper nutrition.</li>
+            <li><strong>Get regular check-ups</strong> – Periodic skin exams help detect changes early.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %}
+  <script>
+    var fileInput = document.getElementById("image");
+    var previewDiv = document.getElementById("image-preview");
+    var previewImg = document.getElementById("preview-img");
+    fileInput.addEventListener("change", function() {
+      var file = this.files[0];
+      if (file && file.type.startsWith("image/")) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          previewImg.src = e.target.result;
+          previewDiv.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewDiv.style.display = "none";
+        previewImg.src = "";
+      }
+    });
+    document.getElementById("predict-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var name = form.querySelector('[name="name"]').value.trim();
+      var email = form.querySelector('[name="email"]').value.trim();
+      var phone = form.querySelector('[name="phone"]').value.trim();
+      var blood_group = form.querySelector('[name="blood_group"]').value;
+      var address = form.querySelector('[name="address"]').value.trim();
+      var fileInput = form.querySelector('input[name="image"]');
+      if (!name || !email || !phone || !blood_group || !address) {
+        alert("Please fill all fields: Name, Email, Phone, Blood Group, Address.");
+        return;
+      }
+      if (!fileInput || !fileInput.files.length) {
+        alert("Please select an image file.");
+        return;
+      }
+      var formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("blood_group", blood_group);
+      formData.append("address", address);
+      formData.append("image", fileInput.files[0]);
+      var btn = document.getElementById("btn-predict");
+      btn.disabled = true;
+      btn.textContent = "Running...";
+      fetch("{{ url_for('predict') }}", {
+        method: "POST",
+        body: formData
+      })
+        .then(function(r) {
+          if (r.status === 401) return r.json().then(function(d) { if (d.redirect) window.location = d.redirect; throw new Error(d.error || "Login required"); });
+          return r.json();
+        })
+        .then(function(res) {
+          var card = document.getElementById("result-card");
+          var suggestionsCard = document.getElementById("suggestions-card");
+          var reviewCard = document.getElementById("review-card");
+          var infectedDiv = document.getElementById("suggestions-infected");
+          var notInfectedDiv = document.getElementById("suggestions-not-infected");
+          if (res.error) {
+            document.getElementById("result-value").textContent = "Error: " + res.error;
+            document.getElementById("user-details-box").style.display = "none";
+            suggestionsCard.style.display = "none";
+            reviewCard.style.display = "none";
+          } else {
+            document.getElementById("user-details-box").style.display = "block";
+            document.getElementById("res-name").textContent = res.user ? res.user.name : name;
+            document.getElementById("res-email").textContent = res.user ? res.user.email : email;
+            document.getElementById("res-phone").textContent = res.user ? res.user.phone : phone;
+            document.getElementById("res-blood").textContent = res.user ? res.user.blood_group : blood_group;
+            document.getElementById("res-address").textContent = res.user ? res.user.address : address;
+            document.getElementById("result-value").textContent = res.label || "";
+            suggestionsCard.style.display = "block";
+            var isDetected = (res.label || "").toLowerCase().indexOf("arsenic detected") >= 0;
+            infectedDiv.style.display = isDetected ? "block" : "none";
+            notInfectedDiv.style.display = isDetected ? "none" : "block";
+            reviewCard.style.display = "block";
+            document.getElementById("review-form").reset();
+            document.getElementById("review-label").value = res.label || "";
+          }
+          card.style.display = "block";
+        })
+        .catch(function(err) {
+          document.getElementById("result-value").textContent = "Error: " + (err.message || "Request failed");
+          document.getElementById("result-card").style.display = "block";
+          document.getElementById("suggestions-card").style.display = "none";
+          document.getElementById("review-card").style.display = "none";
+        })
+        .finally(function() {
+          btn.disabled = false;
+          btn.textContent = "Run Prediction";
+        });
+    });
+
+  </script>
+{% endblock %}

@@ -1,0 +1,52 @@
+timestamp,name,email,phone,blood_group,address,label,probability
+2026-03-07T04:06:44.889274,ahamed,rabbiraz123@gmail.com,01743510037,A+,dhaka uttara,No arsenic,0.4061945974826813
+2026-03-07T04:19:31.853081,ahamed,rabbiraz123@gmail.com,01743510037,O+,sss,No arsenic,0.39560961723327637
+2026-03-07T04:19:51.748177,ahamed,rabbiraz123@gmail.com,01743510037,O+,sss,No arsenic,0.39560961723327637
+2026-03-07T04:19:54.365734,ahamed,rabbiraz123@gmail.com,01743510037,O+,sss,No arsenic,0.39560961723327637
+2026-03-07T04:19:59.481277,ahamed,rabbiraz123@gmail.com,01743510037,O+,sss,No arsenic,0.40055975317955017
+2026-03-07T04:20:02.706075,ahamed,rabbiraz123@gmail.com,01743510037,O+,sss,No arsenic,0.40055975317955017
+2026-03-07T04:20:06.896732,ahamed,rabbiraz123@gmail.com,01743510037,O+,sss,No arsenic,0.40055975317955017
+2026-03-07T04:20:24.500256,ahamed,rabbiraz123@gmail.com,01743510037,A+,ss,No arsenic,0.39518335461616516
+2026-03-07T04:24:12.466273,ahamed,rabbiraz123@gmail.com,01743510037,A+,ss,No arsenic,0.3949759006500244
+2026-03-07T04:24:41.176146,ahamed,rabbiraz123@gmail.com,01743510037,A-,dhaka uttara,No arsenic,0.4032772481441498
+2026-03-07T04:28:34.355634,ahamed,rabbiraz123@gmail.com,01743510037,A-,dhaka uttara,Arsenic detected,0.5967226028442383
+2026-03-07T04:28:40.813065,ahamed,rabbiraz123@gmail.com,01743510037,A+,dhaka uttara,Arsenic detected,0.6013495326042175
+2026-03-07T05:04:10.806070,ahamed,rabbiraz123@gmail.com,01743510037,A+,dhaka uttara,Arsenic detected,0.6013495922088623
+2026-03-07T13:14:07.689016,Test User,test@test.com,1234567890,O+,Test Address,No arsenic,0.3937968611717224
+2026-03-07T13:15:33.365659,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,ss,No arsenic,0.3949759006500244
+2026-03-07T13:17:26.038633,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,kjBxavs,No arsenic,0.380043625831604
+2026-03-07T13:24:18.926107,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,kjBxavs,No arsenic,0.380043625831604
+2026-03-07T13:24:24.107320,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,kjBxavs,No arsenic,0.380043625831604
+2026-03-07T13:24:35.791889,rabby bl,demonsu123@gmail.com,+8801743510037,A+,kjBxavs,No arsenic,0.380043625831604
+2026-03-07T13:26:21.844766,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,klsbhvd,No arsenic,0.39826443791389465
+2026-03-07T13:32:20.959101,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,alk,No arsenic,0.380043625831604
+2026-03-07T13:32:37.260332,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,alk,No arsenic,0.39826443791389465
+2026-03-07T13:34:11.012803,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,jbju;/,No arsenic,0.380043625831604
+2026-03-07T13:38:00.420205,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,kxmk,No arsenic,0.3949759006500244
+2026-03-07T13:40:47.374512,s,demonsu123@gmail.com,ssss,B+,ss,No arsenic,0.3949759006500244
+2026-03-07T13:49:37.285729,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,dhaka uttara,No arsenic,0.3949759006500244
+2026-03-07T13:52:29.349936,rabby ahamed,demonsu123@gmail.com,+8801743510037,O-,dhaka uttara,No arsenic,0.3949759006500244
+2026-03-07T13:52:40.964341,rabby ahamed,demonsu123@gmail.com,+8801743510037,O-,dhaka uttara,No arsenic,0.40015047788619995
+2026-03-07T13:59:01.346624,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,asss,No arsenic,0.39826443791389465
+2026-03-07T14:02:00.738189,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,ss,No arsenic,0.3986504375934601
+2026-03-07T14:04:15.504597,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,dhaka uttara,No arsenic,0.3986504375934601
+2026-03-07T14:06:48.772912,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,dhaka uttara,No arsenic,0.40015047788619995
+2026-03-07T14:16:36.767198,rabby ahamed,demonsu123@gmail.com,+8801743510037,B+,dhaka uttara,No arsenic,0.39547064900398254
+2026-03-07T14:18:07.379609,rabby ahamed,demonsu123@gmail.com,+8801743510037,B-,zxasx,No arsenic,0.380043625831604
+2026-03-07T14:21:39.325892,rabby ahamed,demonsu123@gmail.com,+8801743510037,B-,aaS,No arsenic,0.380043625831604
+2026-03-07T14:23:33.298351,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,JBKBJ,No arsenic,0.380043625831604
+2026-03-07T14:26:30.556169,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,MJ,No arsenic,0.380043625831604
+2026-03-07T14:27:03.336880,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T14:27:49.515637,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T14:31:00.298667,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,xzz,No arsenic,0.380043625831604
+2026-03-07T14:33:09.718448,rabby ahamed,demonsu123@gmail.com,+8801743510037,A+,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T14:37:39.568562,rabby ahamed,demonsu123@gmail.com,+8801743510037,O-,sad,No arsenic,0.380043625831604
+2026-03-07T14:39:26.889035,rabby ahamed,demonsu123@gmail.com,+8801743510037,B-,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T14:40:50.036480,rabby ahamed,demonsu123@gmail.com,+8801743510037,B-,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T14:41:12.610058,rabby ahamed,demonsu123@gmail.com,+8801743510037,B-,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T14:43:33.442987,rabby ahamed,demonsu123@gmail.com,+8801743510037,A-,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T14:44:02.006063,rabby ahamed,demonsu123@gmail.com,+8801743510037,B-,dhaka uttara,No arsenic,0.380043625831604
+2026-03-07T15:03:58.988281,rabby ahamed,demonsu123@gmail.com,+8801743510037,B+,aaS,No arsenic,0.380043625831604
+2026-03-31T22:07:43.317830,ss,rabbiraz123@gmail.com,+8801743510037,O+,dhaka uttara,Arsenic detected,0.6025394797325134
+2026-03-31T22:08:47.635665,rabby ahamed,rabbiraz123@gmail.com,+8801743510037,A+,dhaka uttara,Arsenic detected,0.6025394797325134
+2026-03-31T22:22:03.201861,rabby ahamed,rabbiraz123@gmail.com,+8801743510037,A-,dhaka uttara,Arsenic detected,0.6025394797325134

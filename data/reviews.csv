@@ -1,0 +1,9 @@
+timestamp,rating,review_text
+2026-03-07T14:20:24.694010,5,Great prediction!
+2026-03-07T14:29:10.943777,5,Test review
+2026-03-07T14:30:09.446328,4,Works great!
+2026-03-07T14:35:55.242296,5,Easy form test
+2026-03-07T14:38:48.463763,5,Test via /review
+2026-03-07T14:40:16.524999,5,Test via predict
+2026-03-07T15:01:45.149619,5,Final test
+2026-03-07T15:03:00.072432,5,Simple review test

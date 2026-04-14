@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Arsenic Detection{% endblock %}
+{% block body_class %}dashboard-page{% endblock %}
+{% block content %}
+  <header class="page-header">
+    <h1>Arsenic Detection Dashboard</h1>
+    <p class="page-header-subtitle {% if not user_logged_in %}page-header-subtitle-guest{% endif %}">{% if user_logged_in %}Upload an arsenic image for detection, or ask the chatbot about arsenic awareness in English or Bangla.{% else %}Please <a href="{{ url_for('login') }}">log in</a> or <a href="{{ url_for('register') }}">register</a> to use prediction and chatbot features.{% endif %}</p>
+  </header>
+
+  {% if user_logged_in %}
+  <section class="cards">
+    <div class="card action-card">
+      <h2>Image Prediction</h2>
+      <p class="card-desc">Fill your details and upload an arsenic image to get detection results. Supported formats: JPEG, PNG.</p>
+      <a href="{{ url_for('predict') }}" class="btn btn-primary action-card-btn">Go to Prediction</a>
+    </div>
+    <div class="card action-card">
+      <h2>Arsenic Awareness Chatbot</h2>
+      <p class="card-desc">Ask questions about symptoms, prevention, and treatment in English or Bangla (বাংলা).</p>
+      <a href="{{ url_for('chatbot_page') }}" class="btn btn-primary action-card-btn">Open Chatbot</a>
+    </div>
+  </section>
+  {% else %}
+  <section class="dashboard-hero-box">
+    <img src="{{ url_for('static', filename='images/main.png') }}" alt="Arsenic awareness - contaminated water warning" class="dashboard-hero-img" />
+  </section>
+  {% endif %}
+{% endblock %}
